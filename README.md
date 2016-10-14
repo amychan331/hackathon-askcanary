@@ -1,8 +1,10 @@
 #AskCanary: Share Real Estate Data On-Demand in Slack
 
 ##Description:
-The inspiration of this project comes from a discussion my family had when my sister was purchasing a house. While looking for a house, communication between family members and their real estate agent is important. I would say it is even more so for full time real estate professionals and businesses.
-For individuals like that, they are often on the go and often only carrying a phone. What's a great way to stay on the go, utilize the on-demand data provided by HouseCanary, and be able share the information with other house/team members? That's when I thought of incorporating HouseCanary API with Slack.
+The inspiration of this project comes from a discussion my family had when my sister was purchasing a house. While looking for a house, communication between family members and their real estate agent is important. I would say it is even more so for full time real estate professionals and business.
+
+When I came across the HouseCanary Hackathon, I recalled that dicussion. For full-time professionals and busy family members that are planning to buy a house, they are often on the go and often only carrying a phone. What's a great way to stay on the go, utilize the on-demand data provided by HouseCanary, and be able share the information with other house/team members? That's when I thought of incorporating HouseCanary API with Slack.
+
 The slackbot @askcanary will display the property data requested on demand using HouseCanary's Analytic API. Not only can Slack members view the data at the same time, the same information can be email to non-Slack users using the command "@askcanary email".
 
 ##Environment Variables
