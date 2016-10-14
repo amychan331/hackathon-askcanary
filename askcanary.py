@@ -23,8 +23,9 @@ def to_sendgrid(email, info, name, attachment_data=False):
     to_email = Email(email)
     content = Content("text/plain", info)
     mail = Mail(from_email, subject, to_email, content)
+    # For PDF attachment. Currently working on conversion unicode errors
     if attachment_data:
-        attachment_data = base64.b64encode(attachment_data.encode("utf-8"))
+        attachment_data = base64.b64encode(attachment_data)
         attachment = Attachment()
         attachment.set_content(attachment_data)
         attachment.set_type("application/pdf")
@@ -125,7 +126,7 @@ def process_cmd(cmd):
             clean_cmd = re.sub(r'<mailto.*\|', "", cmd).replace('>', '')
             cmd_list = clean_cmd.split(' with ')
             email_portion = cmd_list[0].split(' ', 3)
-            if len(email_portion) == 4:
+            if len(email_portion) == 4 and len(cmd_list) == 2:
                 result = ["email"]
                 result.append(email_portion[1].strip()) #receiver_email
                 result.append(email_portion[3].strip()) #your_name
@@ -180,7 +181,9 @@ def read_input(cmd, data):
 
                 if len(options) > 1:
                     report_type = "summary" if "summary" in options else "full"
-                    format_type = "pdf" if "pdf" in options else "json"
+                    format_type = "json"
+                    #uncomment below once pdf conversion error is fixed
+                    #format_type = "pdf" if "pdf" in options else "json"
                     info = get_report(data, report_type, format_type)
                 else:
                     info = get_report(data)          
@@ -196,7 +199,6 @@ def read_input(cmd, data):
                 if isinstance(info, list):
                     text = info[0]
                     attachment_data = info[1]
-                    print type(attachment_data)
                     return to_sendgrid(email, text, name, attachment_data)
                 else:
                     return to_sendgrid(email, info, name)
